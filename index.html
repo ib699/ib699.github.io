@@ -1,79 +1,619 @@
-<!doctype html>
-<html>
-  <head>
-    <!-- Page setup -->
-    <meta charset="utf-8">
-    <title>Simple Website</title>
-    <meta name="description" content="A brief description of your site for search engines">
-    <meta name="author" content="Information about the author here">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <link rel="icon" type="image/png" href="favicon.png">
-  
-    <!-- Stylesheets -->
-    <!-- Reset default styles and add support for google fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css" />
-    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
-   
-    <!-- Custom styles -->
-    <link href="style.css" rel="stylesheet" type="text/css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ibrahim Sedighi | Systems & Backend Engineer</title>
+  <meta name="description" content="Portfolio website for Ibrahim Sedighi - Backend, Distributed Systems, Kubernetes, DDS, Go, Linux, and Security Engineer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050816;
+      --surface: #0f172a;
+      --surface-light: #111c36;
+      --primary: #38bdf8;
+      --secondary: #8b5cf6;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(255,255,255,0.08);
+      --gradient: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 100%);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-    <!-- Want to add Bootstrap? -->
-    <!-- Visit: https://getbootstrap.com/docs/4.3/getting-started/introduction/ -->
-    
-  </head>
-  
-  <body>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top right, rgba(56,189,248,0.15), transparent 25%),
+                  radial-gradient(circle at bottom left, rgba(139,92,246,0.15), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-    <header id="header">
-      <img src="logo.jpg">
-      <h1>Simple Website</h1>
-      
-      <!-- Menu link fragment #id should match a div id. Example: <a href="#home"> links to <div id="home"></div>  -->
-      <ul class="main-menu">
-        <li><a href="#home">home</a></li>
-        <li><a href="#about">about</a></li>
-        <li><a href="#contact">contact</a></li>
-      </ul>                 
-    </header>
-   
-    <div id="container">
-      <div class="inner">
-        <div id="content"> 
-          
-          <div id="home" class="content-region hide">
-            <h2>Home</h2>
-            <p>
-              This is a simple website template published with Github Pages. <a href="https://github.com/cpl-makerlab/simple-website-template">Fork this repository</a> to create your own site!
-            </p>
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(5, 8, 22, 0.75);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: 0.25s ease;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .hero-text h1 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 2rem;
+      max-width: 650px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.9rem 1.5rem;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: rgba(56,189,248,0.2);
+      filter: blur(80px);
+      top: -80px;
+      right: -80px;
+    }
+
+    .terminal {
+      background: #020617;
+      border-radius: 18px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      font-family: monospace;
+      position: relative;
+      z-index: 2;
+    }
+
+    .terminal-line {
+      color: #22c55e;
+      margin-bottom: 0.75rem;
+      word-break: break-word;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      font-size: 2.3rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+
+    .about-grid,
+    .projects-grid,
+    .skills-grid,
+    .timeline {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .about-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 1.8rem;
+      transition: 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56,189,248,0.4);
+    }
+
+    .card h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    .card p,
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .skill {
+      padding: 1rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-tag {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.15);
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      position: absolute;
+      left: 3px;
+      top: 6px;
+      box-shadow: 0 0 0 6px rgba(56,189,248,0.15);
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-box {
+      text-align: center;
+      background: linear-gradient(180deg, rgba(56,189,248,0.08), rgba(139,92,246,0.08));
+    }
+
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 4rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#home" class="logo">Ibrahim<span>.dev</span></a>
+
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p>Backend Engineer • Distributed Systems • Linux • Security • Kubernetes</p>
+
+          <h1>
+            Building scalable systems with <span>Go</span>,
+            <span>Kubernetes</span>, and modern infrastructure.
+          </h1>
+
+          <p>
+            Final-year Computer Engineering student focused on backend development,
+            distributed systems, Linux infrastructure, DDS communication systems,
+            policy engines, and secure cloud-native architectures.
+          </p>
+
+          <div class="button-group">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="https://github.com/" target="_blank" class="btn btn-secondary">GitHub</a>
+            <a href="mailto:your-email@example.com" class="btn btn-secondary">Contact Me</a>
           </div>
-          
-          <div id="about" class="content-region hide">
-            <h2>About</h2>
-            <p>
-              Sed tempus urna et pharetra pharetra massa massa ultricies. Porttitor rhoncus dolor purus non enim praesent. Id aliquet risus feugiat in ante metus dictum. 
-            </p>
+        </div>
+
+        <div class="hero-card">
+          <div class="terminal">
+            <div class="terminal-line">$ whoami</div>
+            <div class="terminal-line">ibrahim_sedighi</div>
+
+            <div class="terminal-line">$ tech_stack</div>
+            <div class="terminal-line">Go • Kubernetes • Docker • Linux</div>
+            <div class="terminal-line">Gin • PostgreSQL • OPA • DDS</div>
+
+            <div class="terminal-line">$ interests</div>
+            <div class="terminal-line">Distributed Systems</div>
+            <div class="terminal-line">Infrastructure Automation</div>
+            <div class="terminal-line">Cloud Native Security</div>
+
+            <div class="terminal-line">$ status</div>
+            <div class="terminal-line">Building intelligent backend systems...</div>
           </div>
-          
-          <div id="contact" class="content-region hide">
-            <h2>Contact</h2>
-            <p>
-              Pellentesque nec nam aliquam sem et tortor consequat. Quisque sagittis purus sit amet volutpat consequat. Magna eget est lorem ipsum dolor. 
-            </p>
-          </div>
-          
         </div>
       </div>
-    </div>
+    </section>
 
-    <footer>  
-      Footer region
-    </footer>
-    
-    <!-- Load additional JS scripts here -->
-    <script type="text/javascript" src="script.js"></script>
-    
-  </body>
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">
+          I enjoy designing backend architectures, distributed communication systems,
+          and scalable infrastructure. My work combines systems engineering, cloud-native
+          development, Linux customization, and secure application design.
+        </p>
+
+        <div class="about-grid">
+          <div class="card">
+            <h3>Backend Engineering</h3>
+            <p>
+              Developing APIs and infrastructure with Go, Gin, PostgreSQL, GORM,
+              authentication systems, RBAC/ABAC models, and Open Policy Agent.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Distributed Systems</h3>
+            <p>
+              Building DDS-based communication systems with eProsima Fast DDS,
+              real-time streaming pipelines, and scalable service architectures.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Cloud & Infrastructure</h3>
+            <p>
+              Experience with Kubernetes, Docker, Traefik, NGINX, reverse proxies,
+              VM infrastructure, and Linux server administration.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-subtitle">
+          Technologies and tools I use across backend development, infrastructure,
+          security, and systems engineering.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skill">Go / Gin</div>
+          <div class="skill">PostgreSQL</div>
+          <div class="skill">MongoDB</div>
+          <div class="skill">Kubernetes</div>
+          <div class="skill">Docker</div>
+          <div class="skill">Linux</div>
+          <div class="skill">Traefik</div>
+          <div class="skill">NGINX</div>
+          <div class="skill">OPA / Rego</div>
+          <div class="skill">Fast DDS</div>
+          <div class="skill">DTLS / TLS</div>
+          <div class="skill">Whisper.cpp</div>
+          <div class="skill">QEMU / KVM</div>
+          <div class="skill">Git & CI/CD</div>
+          <div class="skill">Java Card</div>
+          <div class="skill">LwM2M</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">
+          A selection of systems and backend projects focused on scalability,
+          real-time communication, and infrastructure engineering.
+        </p>
+
+        <div class="projects-grid">
+          <div class="card project-card">
+            <span class="project-tag">Distributed Systems</span>
+            <h3>DDS Chatbot Infrastructure</h3>
+            <p>
+              Designed a DDS-based communication layer using eProsima Fast DDS to
+              interface with an OpenAPI-powered chatbot architecture.
+            </p>
+          </div>
+
+          <div class="card project-card">
+            <span class="project-tag">Security</span>
+            <h3>RBAC & ABAC Authorization Engine</h3>
+            <p>
+              Implemented a dynamic policy-driven authorization system using
+              Open Policy Agent, Rego, GORM, and Gin.
+            </p>
+          </div>
+
+          <div class="card project-card">
+            <span class="project-tag">Infrastructure</span>
+            <h3>Traefik Migration Platform</h3>
+            <p>
+              Migrated reverse proxy infrastructure from NGINX to Traefik while
+              maintaining SSL routing and multi-service orchestration.
+            </p>
+          </div>
+
+          <div class="card project-card">
+            <span class="project-tag">Realtime AI</span>
+            <h3>Speech-to-Text Streaming System</h3>
+            <p>
+              Built a real-time transcription pipeline using whisper.cpp,
+              FFmpeg, Discord audio streaming, and Python processing services.
+            </p>
+          </div>
+
+          <div class="card project-card">
+            <span class="project-tag">IoT</span>
+            <h3>Custom LwM2M Server</h3>
+            <p>
+              Developed a custom Go-based LwM2M server implementing registration,
+              resource management, and CoAP communication.
+            </p>
+          </div>
+
+          <div class="card project-card">
+            <span class="project-tag">Linux</span>
+            <h3>Linux Environment Engineering</h3>
+            <p>
+              Personalized advanced Linux desktop environments using Hyprland,
+              Qtile, DWM, Rofi, Starship, and virtualization tooling.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Journey</h2>
+        <p class="section-subtitle">
+          My technical growth across systems engineering, infrastructure,
+          and backend architecture.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>Computer Engineering Student</h3>
+            <p>
+              Final-year Computer Engineering student at AmirKabir University of Technology,
+              focused on backend systems, distributed computing, and infrastructure engineering.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>Infrastructure & Virtualization</h3>
+            <p>
+              Managed reverse proxies, virtualization platforms, Guacamole RDP services,
+              TLS infrastructure, and Kubernetes-based application deployments.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>Security & Policy Systems</h3>
+            <p>
+              Built advanced RBAC and ABAC authorization systems integrating databases,
+              Open Policy Agent, and dynamic policy synchronization.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>Realtime Communication Systems</h3>
+            <p>
+              Worked on DDS communication frameworks, DTLS-secured services,
+              and realtime AI streaming systems.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="card contact-box">
+          <h2 class="section-title">Let's Build Something</h2>
+          <p class="section-subtitle" style="margin-inline:auto;">
+            Interested in backend engineering, infrastructure automation,
+            distributed systems, or collaboration opportunities?
+          </p>
+
+          <div class="button-group" style="justify-content:center;">
+            <a href="mailto:isedighi06@gmail.com" class="btn btn-primary">Email Me</a>
+            <a href="https://github.com/ib699" target="_blank" class="btn btn-secondary">GitHub Profile</a>
+            <a href="https://linkedin.com/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Ibrahim Sedighi — Built with HTML, CSS, and GitHub Pages.</p>
+    </div>
+  </footer>
+</body>
 </html>
