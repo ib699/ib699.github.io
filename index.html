@@ -351,6 +351,63 @@
         width: 100%;
       }
     }
+
+    .hero-badge {
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .hero-description {
+      color: #94a3b8;
+      max-width: 620px;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.85rem 1.4rem;
+      border-radius: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: 0.25s ease;
+    }
+
+    @media (max-width: 700px) {
+      .button-group {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -374,21 +431,35 @@
     <section class="hero" id="home">
       <div class="container hero-grid">
         <div class="hero-text">
-          <p>Software Engineer • Infrastructure • IAM • Linux • DevOps • Embedded Systems</p>
+          <p class="hero-badge">
+            Software Engineer • Infrastructure • IAM • Linux
+          </p>
 
-          <h1>
-            Building secure infrastructure, IAM systems, and scalable backend platforms with <span>Golang</span>, <span>Linux</span>, and modern DevOps technologies.
+          <h1 class="hero-title">
+            Backend, Infrastructure & Security Engineer
           </h1>
+
+          <h2 class="hero-subtitle">
+            Building secure backend systems, enterprise infrastructure,
+            virtualization platforms, and scalable IAM solutions.
+          </h2>
 
           <p>
             Software Engineer with hands-on experience in infrastructure engineering, identity and access management, virtualization, embedded systems, DevOps, and secure backend architecture. Experienced with enterprise networking, Linux servers, Golang services, Java Spring Boot, and telecom-grade systems.
           </p>
 
           <div class="button-group">
-            <a href="#projects" class="btn btn-primary">View Projects</a>
-            <a href="https://github.com/ib699" target="_blank" class="btn btn-secondary">GitHub</a>
-            <a href="mailto:isedighi06@gmail.com" class="btn btn-secondary">Contact Me</a>
-            <a href="resume.pdf" download class="btn btn-secondary">Download Resume</a>
+            <a href="#projects" class="btn btn-primary">
+              View Projects
+            </a>
+
+            <a href="resume.pdf" download class="btn btn-secondary">
+              Resume
+            </a>
+
+            <a href="mailto:isedighi06@gmail.com" class="btn btn-secondary">
+              Contact
+            </a>
           </div>
         </div>
 
