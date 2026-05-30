@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ibrahim Sedighi</title>
   <meta name="description" content="Ibrahim Sedighi — Software Engineer specializing in infrastructure, IAM, backend systems, and embedded engineering." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23060a10'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='18' fill='%23f0a500'>IS</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
@@ -18,13 +19,28 @@
       --amber2:   #e07b00;
       --ice:      #a8c8e8;
       --ice2:     #7aafd4;
-      --rust:     #c0392b;
       --text:     #dce8f0;
       --sub:      #7a9ab8;
       --faint:    #2a3a50;
       --mono:     'DM Mono', monospace;
       --sans:     'Bricolage Grotesque', sans-serif;
     }
+
+    :root.light {
+      --bg:    #f5f2ec;
+      --s1:    #edeae2;
+      --s2:    #e5e1d7;
+      --s3:    #dbd7cc;
+      --amber:  #b87200;
+      --amber2: #9a5f00;
+      --ice:    #2d5a7a;
+      --ice2:   #3a6a90;
+      --text:   #141414;
+      --sub:    #555555;
+      --faint:  #cac6ba;
+    }
+
+    *, *::before, *::after { transition: background-color .3s ease, border-color .3s ease, color .3s ease; }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
@@ -36,6 +52,41 @@
       overflow-x: hidden;
       cursor: none;
     }
+
+    /* ─── THEME TOGGLE ─── */
+    #theme-btn {
+      font-family: var(--mono); font-size: .7rem; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--sub);
+      background: transparent; border: 1px solid var(--faint);
+      border-radius: 3px; padding: .4rem .75rem;
+      cursor: none; display: flex; align-items: center; gap: .45rem;
+      transition: border-color .2s, color .2s;
+    }
+    #theme-btn:hover { border-color: var(--amber); color: var(--amber); }
+    #theme-btn .t-icon { font-size: .85rem; line-height:1; }
+
+    /* light mode overrides for things hardcoded */
+    :root.light .grid-bg {
+      background-image:
+        linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px);
+    }
+    :root.light .blob-a { background: rgba(184,114,0,.08); }
+    :root.light .blob-b { background: rgba(45,90,122,.06); }
+    :root.light .term { background: #e8e4dc; border-color: rgba(0,0,0,.12); box-shadow: 0 20px 50px rgba(0,0,0,.12); }
+    :root.light .term-bar { background: rgba(0,0,0,.05); border-bottom-color: rgba(0,0,0,.08); }
+    :root.light .term-title { color: #aaa; }
+    :root.light .tp { color: var(--amber); }
+    :root.light .tc { color: var(--ice2); }
+    :root.light .to { color: var(--sub); }
+    :root.light .to.hi { color: var(--ice); }
+    :root.light .t-blink { background: var(--amber); }
+    :root.light nav { background: rgba(245,242,236,.88); }
+    :root.light .h-name em { -webkit-text-stroke-color: var(--ice2); }
+    :root.light .stat-n { color: var(--amber); }
+    :root.light .ac-bar { background: var(--amber); }
+    :root.light .proj-tag::before { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+    :root.light .nav-dot { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
 
     /* scrollbar */
     ::-webkit-scrollbar { width: 3px; }
@@ -443,6 +494,10 @@
       <a href="#experience">work</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
+      <button id="theme-btn" aria-label="Toggle theme">
+        <span class="t-icon">◐</span>
+        <span id="theme-label">light</span>
+      </button>
       <div class="nav-dot"></div>
     </div>
   </nav>
@@ -760,6 +815,17 @@
   </footer>
 
   <script>
+    // theme toggle
+    const root = document.documentElement;
+    const btn = document.getElementById('theme-btn');
+    const label = document.getElementById('theme-label');
+    let dark = true;
+    btn.addEventListener('click', () => {
+      dark = !dark;
+      root.classList.toggle('light', !dark);
+      label.textContent = dark ? 'light' : 'dark';
+    });
+
     // cursor
     const cur = document.getElementById('cur');
     const curo = document.getElementById('cur-o');
