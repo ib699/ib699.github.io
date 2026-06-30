@@ -365,6 +365,13 @@
       font-family:var(--mono); font-size:.75rem; color:var(--sub);
       margin-bottom:1.2rem; letter-spacing:.5px;
     }
+    .exp-co a {
+      color:var(--sub); text-decoration:none;
+      border-bottom:1px solid var(--faint);
+      transition:color .2s, border-color .2s; cursor:none;
+    }
+    .exp-co a:hover { color:var(--amber); border-color:var(--amber); }
+    .exp-co a::after { content:' ↗'; font-size:.85em; color:var(--amber); border:none; }
     .exp-list { list-style:none; }
     .exp-list li {
       font-size:.88rem; color:var(--sub); line-height:1.65;
@@ -694,7 +701,7 @@
           <div>
             <div class="exp-period">2020 – 2025</div>
             <h3>B.Sc. Computer Engineering</h3>
-            <div class="exp-co">AmirKabir University of Technology</div>
+            <div class="exp-co"><a href="https://aut.ac.ir" target="_blank" rel="noopener">AmirKabir University of Technology</a></div>
           </div>
           <div class="edu-meta">
             <span class="stag">Systems Engineering</span>
@@ -707,7 +714,7 @@
         <div class="exp-card rv">
           <div class="exp-period">Jul 2022 – May 2024</div>
           <h3>Software Engineer</h3>
-          <div class="exp-co">Hooshmand Sazan Bita</div>
+          <div class="exp-co"><a href="https://www.hsbco.ir" target="_blank" rel="noopener">Hooshmand Sazan Bita</a></div>
           <ul class="exp-list">
             <li>Built a scalable access control system in Java Spring Boot with a microservices architecture and fine-grained RBAC authorization.</li>
             <li>Designed and fabricated a custom STM32 embedded device with Weigand, RS485, and LCD interfaces communicating over HTTP/Sockets.</li>
@@ -721,7 +728,7 @@
         <div class="exp-card rv">
           <div class="exp-period">Jul 2024 – Present</div>
           <h3>Software Engineer</h3>
-          <div class="exp-co">Meshkot</div>
+          <div class="exp-co"><a href="https://meshkotco.com" target="_blank" rel="noopener">Meshkot</a></div>
           <ul class="exp-list">
             <li>Designed and secured the entire corporate network &amp; server stack (HPE ProLiant, Cisco, MikroTik) virtualised on Proxmox; enforced ISO 27001.</li>
             <li>Engineered a full IAM service in Golang with custom RBAC, ABAC, and a Policy Engine for granular access control.</li>
