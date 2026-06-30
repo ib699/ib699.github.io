@@ -292,7 +292,7 @@
     .s-sub { color:var(--sub); margin-top:.7rem; font-size:.95rem; line-height:1.75; max-width:580px; }
 
     /* ─── REVEAL ─── */
-    .rv { opacity:0; transform:translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .rv { opacity:0; transform:translateY(28px); transition: opacity 1.1s ease, transform 1.1s ease; }
     .rv.on { opacity:1; transform:translateY(0); }
 
     /* ─── ABOUT ─── */
@@ -838,33 +838,39 @@
       requestAnimationFrame(loop);
     })();
 
-    // reveal on scroll
+    // reveal on scroll — fires the instant the element enters the viewport
     const obs = new IntersectionObserver(entries=>{
-      entries.forEach((e,i)=>{
+      entries.forEach(e=>{
         if(e.isIntersecting){
-          setTimeout(()=>e.target.classList.add('on'), i*70);
+          e.target.classList.add('on');
           obs.unobserve(e.target);
         }
       });
-    },{threshold:.1});
+    },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
-    // stagger children inside rv containers
-    document.querySelectorAll('.ac,.stag,.proj-card,.exp-card,.exp-list li').forEach((el,i)=>{
+    // stagger children inside rv containers — triggered by scroll, not a page-wide timer.
+    // The delay is computed relative to siblings, so each section cascades on arrival.
+    const childSel = '.ac,.stag,.proj-card,.exp-card,.exp-list li';
+    document.querySelectorAll(childSel).forEach(el=>{
       el.style.opacity='0';
       el.style.transform='translateY(20px)';
-      el.style.transition=`opacity .5s ease ${i*.05}s, transform .5s ease ${i*.05}s`;
-      const o2=new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            entry.target.style.opacity='1';
-            entry.target.style.transform='translateY(0)';
-            o2.unobserve(entry.target);
-          }
-        });
-      },{threshold:.08});
-      o2.observe(el);
+      el.style.transition='opacity .9s ease, transform .9s ease';
     });
+    const childObs=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const el=entry.target;
+          const sibs=Array.from(el.parentElement.children).filter(c=>c.matches(childSel));
+          const idx=Math.max(0, sibs.indexOf(el));
+          el.style.transitionDelay=(idx*0.1)+'s';
+          el.style.opacity='1';
+          el.style.transform='translateY(0)';
+          childObs.unobserve(el);
+        }
+      });
+    },{threshold:.12});
+    document.querySelectorAll(childSel).forEach(el=>childObs.observe(el));
 
     // active nav
     const secs=document.querySelectorAll('section[id]');
